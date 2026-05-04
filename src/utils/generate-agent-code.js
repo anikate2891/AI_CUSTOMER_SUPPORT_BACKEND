@@ -8,12 +8,13 @@ const sendAgentTokenResponse = (agent, res) => {
         { expiresIn: '7d' }
     )
 
-    res.cookie('agentToken', token, {
-        httpOnly: true,
-        secure: config.NODE_ENV === 'production',
-        sameSite: 'lax',
-        maxAge: 7 * 24 * 60 * 60 * 1000,
-    })
+    res.cookie("agentToken", token, {  // ✅ agentToken
+  httpOnly: true,
+  sameSite: "none",
+  secure: true,
+  path: "/",
+  maxAge: 7 * 24 * 60 * 60 * 1000,
+});
 
     // ✅ YE ADD KARO
     return res.status(200).json({

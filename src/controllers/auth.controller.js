@@ -174,10 +174,10 @@
   };
 
   export const logoutController = (req, res) => {
-    res.clearCookie('token', {
-      httpOnly: true,
-      sameSite: 'lax',
-      secure: false,
-    });
+    res.clearCookie('businessToken', {
+  httpOnly: true,
+  sameSite: 'none',  // ✅
+  secure: true,      // ✅
+});
     return res.status(200).json({ message: 'Logged out successfully' });
   };
