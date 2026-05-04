@@ -136,12 +136,12 @@
 
       // ✅ Sahi options ke saath cookie set karo
       res.cookie("token", token, {
-        httpOnly: true,
-        sameSite: "lax",
-        secure: config.NODE_ENV === "production",
-        path: "/",
-        maxAge: 7 * 24 * 60 * 60 * 1000,
-      });
+  httpOnly: true,
+  sameSite: "none",  // ✅ lax se none
+  secure: true,      // ✅
+  path: "/",
+  maxAge: 7 * 24 * 60 * 60 * 1000,
+});
 
       // role ke basis pe redirect karo
       if (user.role === "customer") {
@@ -174,10 +174,10 @@
   };
 
   export const logoutController = (req, res) => {
-    res.clearCookie('businessToken', {
+    res.clearCookie('token', {  // ✅ businessToken nahi, token!
   httpOnly: true,
-  sameSite: 'none',  // ✅
-  secure: true,      // ✅
+  sameSite: 'none',
+  secure: true,
 });
     return res.status(200).json({ message: 'Logged out successfully' });
   };
