@@ -53,6 +53,7 @@ passport.use(new GoogleStrategy({
 }));
 
 console.log("CALLBACK URL:", `${config.BACKEND_URL}/api/auth/google/callback`);     
+console.log("BACKEND_URL:", config.BACKEND_URL);
 
 // 6. Routes
 app.use('/api/auth', authRouter);   
