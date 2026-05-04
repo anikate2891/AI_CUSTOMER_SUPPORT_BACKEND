@@ -7,9 +7,10 @@ export default async function sendTokenResponse(user, res, message) {
   });
 
   res.cookie("token", token, {
-    httpOnly: true,
-    secure: config.NODE_ENV === "production",
-    sameSite: "lax",
-    maxAge: 7 * 24 * 60 * 60 * 1000,
-  });
+  httpOnly: true,
+  sameSite: "none",    // ✅ lax se none karo
+  secure: true,        // ✅ none ke saath secure: true zaruri hai
+  path: "/",
+  maxAge: 7 * 24 * 60 * 60 * 1000,
+});
 }

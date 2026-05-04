@@ -25,10 +25,11 @@
       // 2. Generate Token
       const token = jwt.sign({ id: user._id }, config.JWT_SECRET, { expiresIn: '7d' });
 
-      res.cookie("token", token, {
+            res.cookie("token", token, {
         httpOnly: true,
-        secure: config.NODE_ENV === "production",
-        sameSite: "lax",
+        sameSite: "none",    // ✅ lax se none karo
+        secure: true,        // ✅ none ke saath secure: true zaruri hai
+        path: "/",
         maxAge: 7 * 24 * 60 * 60 * 1000,
       });
 
