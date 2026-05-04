@@ -1,0 +1,10 @@
+{
+  "ignore": [
+    "storage/**",
+    "apify_storage/**",
+    "*.log",
+    "node_modules"
+  ],
+  "watch": ["src", "server.js", ".env"],
+  "ext": "js,json"
+}
