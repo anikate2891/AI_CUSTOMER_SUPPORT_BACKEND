@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { config } from "../config/config.js";
 import {
   registerController,
   loginController,
@@ -29,7 +30,7 @@ authRouter.get(
   "/google/callback",
   passport.authenticate("google", {
     session: false,
-    failureRedirect: "http://localhost:5173/login",
+    failureRedirect: `${config.FRONTEND_URL}/login`, // 🔴 yahi change karo
   }),
   googleCallbackController,
 );

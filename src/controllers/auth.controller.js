@@ -45,7 +45,7 @@ export const registerController = async (req, res) => {
 
     // 4. Send Email in background
     try {
-      const verifyUrl = `http://localhost:8000/api/auth/verify-email?token=${token}`;
+      const verifyUrl = `${config.BACKEND_URL}/api/auth/verify-email?token=${token}`;
       sendEmail(
         email,
         "Verify Your SupportAI Account",
@@ -142,9 +142,9 @@ export const googleCallbackController = async (req, res) => {
 
     // role ke basis pe redirect karo
     if (user.role === "customer") {
-      return res.redirect("http://localhost:5173/customer");
+      return res.redirect(`${config.FRONTEND_URL}/customer`);
     } else {
-      return res.redirect("http://localhost:5173/admin");
+      return res.redirect(`${config.FRONTEND_URL}/dashboard`);
     }
   } catch (error) {
     return res
@@ -164,7 +164,7 @@ export const verifyEmail = async (req, res) => {
     user.isVerified = true;
     await user.save();
 
-    return res.redirect("http://localhost:5173/login");
+    return res.redirect(`${config.FRONTEND_URL}/login`);
   } catch (error) {
     return res.status(400).json({ message: "Verification failed or token expired." });
   }

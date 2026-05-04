@@ -39,12 +39,12 @@ export const businessRegister = async (req, res) => {
         sendEmail(
              businessEmail,
     `Verify Your SupportAI Account`,
-    `Hi ${organization}, please verify your email: http://localhost:8000/api/business/verify-email?token=${token}`,
+    `Hi ${organization}, please verify your email: ${config.BACKEND_URL}/api/business/verify-email?token=${token}`,
     `<div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
         <h2 style="color: #333;">Verify Your Email, ${organization}!</h2>
         <p style="color: #555;">Please verify your email address to activate your account.</p>
         <div style="text-align: center; margin: 24px 0;">
-            <a href="http://localhost:8000/api/business/verify-email?token=${token}" 
+            <a href="${config.BACKEND_URL}/api/business/verify-email?token=${token}" 
                style="display: inline-block; background-color: #4F46E5; color: white; padding: 12px 24px; border-radius: 6px; text-decoration: none;">
                 Verify Email
             </a>
@@ -90,7 +90,7 @@ export const verifyEmail = async (req,res) => {
             business.isVerified = true
             await business.save()
             if(business.isVerified){
-                return res.redirect("http://localhost:5173/login")
+                return res.redirect(`${config.FRONTEND_URL}/login`)
             }
     } catch (error) {
         res.status(400).json({message:error.message})

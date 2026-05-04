@@ -47,10 +47,12 @@ app.use(passport.initialize());
 passport.use(new GoogleStrategy({
     clientID: config.GOOGLE_CLIENT_ID,
     clientSecret: config.GOOGLE_CLIENT_SECRET,
-    callbackURL: "http://localhost:8000/api/auth/google/callback" 
+    callbackURL: `${config.BACKEND_URL}/api/auth/google/callback`  // ← yahi change karo
 }, (accessToken, refreshToken, profile, done) => {
     return done(null, profile);
 }));
+
+console.log("CALLBACK URL:", `${config.BACKEND_URL}/api/auth/google/callback`);     
 
 // 6. Routes
 app.use('/api/auth', authRouter);   

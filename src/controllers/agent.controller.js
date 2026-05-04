@@ -37,7 +37,7 @@ export const agentRegister = async (req, res) => {
     await sendEmail(
       agentEmail,
       `Verify Your SupportAI Agent Account`,
-      `Hi ${agentFullName}, please verify your email using this link: http://localhost:8000/api/agent/verify-email?token=${token}`,
+      `Hi ${agentFullName}, please verify your email using this link: ${config.BACKEND_URL}/api/agent/verify-email?token=${token}`,
       `<div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
     <h2 style="color: #333;">Verify Your Email, ${agentFullName}!</h2>
     <p style="color: #555;">
@@ -45,7 +45,7 @@ export const agentRegister = async (req, res) => {
     </p>
 
     <div style="text-align: center; margin: 24px 0;">
-        <a href="http://localhost:8000/api/agent/verify-email?token=${token}" 
+        <a href="${config.BACKEND_URL}/api/agent/verify-email?token=${token}" 
            style="display: inline-block; background-color: #4F46E5; color: white; padding: 12px 24px; border-radius: 6px; text-decoration: none;">
             Verify Email
         </a>
@@ -56,7 +56,7 @@ export const agentRegister = async (req, res) => {
     </p>
 
     <p style="word-break: break-all; color: #4F46E5;">
-      http://localhost:8000/api/agent/verify-email?token=${token}
+      ${config.BACKEND_URL}/api/agent/verify-email?token=${token}
     </p>
 
     <p style="color: #999; font-size: 12px; margin-top: 20px;">
@@ -80,7 +80,7 @@ export const agentVerifyEmail = async (req, res) => {
     if(!agent) return res.status(404).json({message:"invalid token"})
         agent.isVerified = true
         await agent.save()
-        res.redirect('http://localhost:5173/login')
+        res.redirect(`${config.FRONTEND_URL}/login`)
   } catch (error) { res.status(500).json({message:error.message})}
 };
 
